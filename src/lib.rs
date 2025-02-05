@@ -60,7 +60,8 @@ impl ClerkFdw {
                             email.get("id") == Some(primary_id)
                         ))
                         .and_then(|email| email.get("email_address"))
-                        .map(|v| Cell::String(v.to_string()))
+                        .and_then(|v| v.as_str())
+                        .map(|v| Cell::String(v.to_owned()))
                 }));
         }
 
